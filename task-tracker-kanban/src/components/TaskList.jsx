@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import TaskCard from "./TaskCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-function TaskList({ tasks, name, adder, onAddTask }) {
+function TaskList({ tasks, name, droppableId, adder, onAddTask }) {
   const [addingTask, setAddingTask] = useState(false);
 
   return (
-    <Droppable droppableId={name} style={{ width: "100%" }}>
+    <Droppable droppableId={droppableId} style={{ width: "100%" }}>
       {(provided) => (
         <div
           className="task-list-container"
@@ -18,7 +18,7 @@ function TaskList({ tasks, name, adder, onAddTask }) {
             {adder && <TaskCard onAddTask={onAddTask} />}
             {tasks.map((task, index) => (
               <Draggable key={task.id} draggableId={task.id} index={index}>
-                {(provided) => (
+                {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
                     {...provided.draggableProps}
@@ -30,13 +30,14 @@ function TaskList({ tasks, name, adder, onAddTask }) {
                       dueDate={task.dueDate}
                       priority={task.priority}
                       description={task.description}
+                      dragging={snapshot.isDragging}
                     />
                   </div>
                 )}
               </Draggable>
             ))}
-            {provided.placeholder}
           </div>
+          {provided.placeholder}
         </div>
       )}
     </Droppable>

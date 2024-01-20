@@ -2,12 +2,12 @@ import { useRef } from "react";
 import { useState } from "react";
 
 export default function TaskCard({
-  id,
   taskname,
   dueDate,
   priority,
   description,
   onAddTask,
+  dragging,
 }) {
   const [showPopup, setShowPopup] = useState(false);
 
@@ -58,7 +58,7 @@ export default function TaskCard({
       )}
       {!onAddTask && (
         <>
-          <div className="task-card">
+          <div className={`task-card ${dragging ? "dragging" : ""}`}>
             <h3>{taskname}</h3>
             <p>{dueDate}</p>
             <p>{priority}</p>
