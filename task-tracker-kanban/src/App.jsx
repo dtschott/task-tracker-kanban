@@ -47,8 +47,6 @@ function reorder(list, startIndex, endIndex) {
   return result;
 }
 
-function moveTask() {}
-
 function App() {
   const [todos, setTodos] = useState(exampleTodos);
   const [inProgress, setInProgress] = useState(exampleInProgress);
@@ -65,7 +63,6 @@ function App() {
   }
 
   function handleDragEnd(result) {
-    console.log(result);
     const { source, destination } = result;
     if (!destination) return;
     const sourceColumn = columns[source.droppableId];
@@ -79,7 +76,9 @@ function App() {
       sourceColumn[1](reorderedColumn);
     } else {
       const [removed] = sourceColumn[0].splice(source.index, 1);
-      destColumn[1]([...destColumn[0], removed]);
+      const reorderedArray = Array.from(destColumn[0]);
+      reorderedArray.splice(destination.index, 0, removed);
+      destColumn[1](reorderedArray);
     }
   }
 

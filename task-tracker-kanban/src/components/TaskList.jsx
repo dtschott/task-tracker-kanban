@@ -6,20 +6,21 @@ function TaskList({ tasks, name, droppableId, adder, onAddTask }) {
   const [addingTask, setAddingTask] = useState(false);
 
   return (
-    <Droppable droppableId={droppableId} style={{ width: "100%" }}>
-      {(provided) => (
-        <div
-          className="task-list-container"
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-        >
-          <h1>{name}</h1>
-          <div className="task-list">
-            {adder && <TaskCard onAddTask={onAddTask} />}
+    <div className="task-list-container">
+      <h1>{name}</h1>
+      {adder && <TaskCard onAddTask={onAddTask} />}
+      <Droppable droppableId={droppableId} style={{ width: "100%" }}>
+        {(provided) => (
+          <div
+            className="task-list"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
             {tasks.map((task, index) => (
               <Draggable key={task.id} draggableId={task.id} index={index}>
                 {(provided, snapshot) => (
                   <div
+                    className="task-card-container"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -38,9 +39,9 @@ function TaskList({ tasks, name, droppableId, adder, onAddTask }) {
             ))}
             {provided.placeholder}
           </div>
-        </div>
-      )}
-    </Droppable>
+        )}
+      </Droppable>
+    </div>
   );
 }
 

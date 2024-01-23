@@ -29,7 +29,7 @@ export default function TaskCard({
   };
 
   return (
-    <div className="task-card-container">
+    <>
       {onAddTask && (
         <div className="task-card add-task">
           <input
@@ -67,6 +67,6 @@ export default function TaskCard({
           {showPopup && <div className="task-card-popup"></div>}
         </>
       )}
-    </div>
+    </>
   );
 }
