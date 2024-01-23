@@ -36,8 +36,8 @@ function TaskList({ tasks, name, droppableId, adder, onAddTask }) {
                 )}
               </Draggable>
             ))}
+            {provided.placeholder}
           </div>
-          {provided.placeholder}
         </div>
       )}
     </Droppable>

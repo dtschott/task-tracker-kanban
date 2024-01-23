@@ -40,6 +40,15 @@ const exampleCompleted = [
   },
 ];
 
+function reorder(list, startIndex, endIndex) {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+  return result;
+}
+
+function moveTask() {}
+
 function App() {
   const [todos, setTodos] = useState(exampleTodos);
   const [inProgress, setInProgress] = useState(exampleInProgress);
@@ -68,14 +77,10 @@ function App() {
         result.destination.index
       );
       sourceColumn[1](reorderedColumn);
+    } else {
+      const [removed] = sourceColumn[0].splice(source.index, 1);
+      destColumn[1]([...destColumn[0], removed]);
     }
-  }
-
-  function reorder(list, startIndex, endIndex) {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
   }
 
   return (

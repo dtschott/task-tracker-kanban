@@ -31,7 +31,6 @@ body {
 
 .task-card.dragging {
   opacity: 0.5;
-  transition: opacity 0.2s ease-in-out;
 }
 
 .task-card.add-task {
@@ -49,6 +48,7 @@ body {
 
 .task-list-container {
   width: 33.33%;
+  height: 100vh;
   padding: 0 3%;
 }
 
